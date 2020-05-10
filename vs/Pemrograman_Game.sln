@@ -19,7 +19,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lesson07", "Lesson07\Lesson
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lesson08", "Lesson08\Lesson08.vcxproj", "{B3A056C9-027D-450B-BA00-35F018DEC4B7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcxproj", "{BEBF54E3-5EA9-4349-BE8B-FD8BD0B3A4AE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL_Engine", "OpenGL_Engine\OpenGL_Engine.vcxproj", "{BEBF54E3-5EA9-4349-BE8B-FD8BD0B3A4AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

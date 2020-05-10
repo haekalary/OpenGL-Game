@@ -24,7 +24,7 @@ public:
 	TurnBasedGame();
 	~TurnBasedGame();
 	virtual void Init();
-	virtual void Update(float deltaTime);
+	virtual void Update();
 	virtual void Render();
 	float frame_width = 0, frame_height = 0;
 	GameObject player;

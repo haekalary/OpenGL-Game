@@ -13,11 +13,12 @@
 #include <GLM/gtc/type_ptr.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
+#include "Input.h"
+#include "Time.h"
+
 using namespace std;
 using namespace glm;
-
-enum class State { RUNNING, EXIT };
-enum class WindowFlag { WINDOWED, FULLSCREEN, EXCLUSIVE_FULLSCREEN, BORDERLESS };
+using namespace Settings;
 
 namespace Engine {
 	class ScratchEngine
@@ -25,45 +26,26 @@ namespace Engine {
 	public:
 		ScratchEngine();
 		~ScratchEngine();
+
 		void Start(string title, unsigned int width, unsigned int height, bool vsync, WindowFlag windowFlag, unsigned int targetFrameRate, float timeScale);
-		// Input Handling
-		void PressKey(unsigned int keyID);
-		void ReleaseKey(unsigned int keyID);
-		void SetMouseCoords(float x, float y);
-		// Returns true if the key is held down
-		bool IsKeyDown(string name);
-		// Returns true if the key was just pressed
-		bool IsKeyUp(string name);
-		// getters
-		vec2 GetMouseCoords() const { return _mouseCoords; }
-		// Returns true if the key is held down
-		bool WasKeyDown(string name);
-		void InputMapping(string mappingName, unsigned int keyId);
+		
+		State state;
+		Input input;
 
 	protected:
 		virtual void Init() = 0;
-		virtual void Update(float deltaTime) = 0;
+		virtual void Update() = 0;
 		virtual void Render() = 0;
 		unsigned int GetScreenHeight();
 		unsigned int GetScreenWidth();
 	
 	private:
-		unordered_map<unsigned int, string> _mapNames;
-		unordered_map<string, bool> _keyMap;
-		unordered_map<string, bool> _previousKeyMap;
-		vec2 _mouseCoords;
-		SDL_GameController *controller;
-		unsigned int screenWidth, screenHeight, lastFrame = 0, last = 0, _fps = 0, fps = 0;
-		float targetFrameTime = 0, timeScale;
-		State state;
-		float GetDeltaTime();
+		unsigned int screenWidth, screenHeight, last = 0, _fps = 0, fps = 0;
+		float targetFrameTime = 0;
 		void GetFPS();
-		void PollInput();
 		void Err(string errorString);
 		void LimitFPS();
 		void PrintFPS();
-		void OpenGameController();
-		void CloseGameController();
 	};
 }
 #endif

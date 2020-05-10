@@ -4,6 +4,7 @@
 TurnBasedGame::TurnBasedGame()
 {
 	player = GameObject();
+	
 }
 
 
@@ -16,15 +17,15 @@ void TurnBasedGame::Init()
 	BuildPlayerSprite();
 }
 
-void TurnBasedGame::Update(float deltaTime)
+void TurnBasedGame::Update()
 {
-	if (IsKeyDown("Quit")) {
+	if (input.GetKeyDown("Quit")) {
 		SDL_Quit();
 		exit(0);
 	}
 
-	UpdateSpriteAnim(deltaTime);
-	ControlPlayerSprite(deltaTime);
+	UpdateSpriteAnim(Time::deltaTime);
+	ControlPlayerSprite(Time::deltaTime);
 }
 
 void TurnBasedGame::Render()
@@ -59,26 +60,26 @@ void TurnBasedGame::ControlPlayerSprite(float deltaTime)
 {
 	walk_anim = false;
 
-	if (IsKeyDown("Move Right")) {
+	if (input.GetKeyDown("Move Right")) {
 		xpos += deltaTime * xVelocity;
 		flip = 0;
 		walk_anim = true;
 	}
 
-	if (IsKeyDown("Move Left")) {
+	if (input.GetKeyDown("Move Left")) {
 		xpos -= deltaTime * xVelocity;
 		flip = 1;
 		walk_anim = true;
 	}
 
-	if (IsKeyDown("Jump")) {
+	if (input.GetKeyDown("Jump")) {
 		if (onGround) {
 			yVelocity = -12.0f;
 			onGround = false;
 		}
 	}
 
-	if (IsKeyUp("Jump")) {
+	if (input.GetKeyUp("Jump")) {
 		if (yVelocity < -6.0f) {
 			yVelocity = -6.0f;
 		}
@@ -180,17 +181,17 @@ void TurnBasedGame::BuildPlayerSprite()
 
 	// Add input mapping
 	// to offer input change flexibility you can save the input mapping configuration in a configuration file (non-hard code) !
-	InputMapping("Move Right", SDLK_RIGHT);
-	InputMapping("Move Left", SDLK_LEFT);
-	InputMapping("Move Right", SDLK_d);
-	InputMapping("Move Left", SDLK_a);
-	InputMapping("Move Right", SDL_BUTTON_RIGHT);
-	InputMapping("Move Left", SDL_BUTTON_LEFT);
-	InputMapping("Move Right", SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
-	InputMapping("Move Left", SDL_CONTROLLER_BUTTON_DPAD_LEFT);
-	InputMapping("Quit", SDLK_ESCAPE);
-	InputMapping("Jump", SDLK_SPACE);
-	InputMapping("Jump", SDL_CONTROLLER_BUTTON_A);
+	input.InputMapping("Move Right", SDLK_RIGHT);
+	input.InputMapping("Move Left", SDLK_LEFT);
+	input.InputMapping("Move Right", SDLK_d);
+	input.InputMapping("Move Left", SDLK_a);
+	input.InputMapping("Move Right", SDL_BUTTON_RIGHT);
+	input.InputMapping("Move Left", SDL_BUTTON_LEFT);
+	input.InputMapping("Move Right", SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
+	input.InputMapping("Move Left", SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+	input.InputMapping("Quit", SDLK_ESCAPE);
+	input.InputMapping("Jump", SDLK_SPACE);
+	input.InputMapping("Jump", SDL_CONTROLLER_BUTTON_A);
 }
 
 
