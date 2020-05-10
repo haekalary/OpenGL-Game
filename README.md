@@ -1,1 +1,1 @@
-# OpenGL-Game
+# OpenGL Project Akhir
